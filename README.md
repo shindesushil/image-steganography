@@ -1,6 +1,6 @@
 # Image Steganography
 
-## Important Dependencies
+###### Important Dependencies
 
 > Kivy
 > Numpy
