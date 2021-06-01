@@ -1,0 +1,177 @@
+WindowManager:
+    HomeWindow:
+    EncodeWindow:
+    DecodeWindow:
+
+<HomeWindow>:
+    name: "home"
+
+    GridLayout:
+        cols:1
+
+        Label:
+            text: "Image Steganography"
+            font_size: 40
+
+        GridLayout:
+            cols:2
+
+            Button:
+                text: "Encode"
+                font_size: 32
+                background_color: (1,1,1,0)
+                color: "#00ff00"
+                on_release: 
+                    app.root.current = "encode"
+                    root.manager.transition.direction = "right"
+
+            Button:
+                text: "Decode"
+                font_size: 32
+                background_color: (1,1,1,0)
+                color: "#00ff00"
+                on_release: 
+                    app.root.current = "decode"
+                    root.manager.transition.direction = "left"
+
+
+
+<EncodeWindow>:
+    id: encodeWindow
+    name: "encode"
+
+        
+    GridLayout:
+        cols:2
+
+
+        GridLayout:
+            cols:1
+
+            padding: 50
+            spacing: 5
+
+            Label:
+                text: "Encode Message"
+                size_hint_y : None
+                height: 100
+                font_size: 40
+
+
+            Label:
+                text: "Input File"
+                size_hint_y : None
+                height: 60
+                font_size: 30
+                color: "#00ff00"
+                halign: "left"
+
+            FileChooserIconView:
+                id: filechooser
+                on_selection: encodeWindow.selected(filechooser.selection)
+
+            Button:
+                text: "Back"
+                size_hint: None, None
+                size: 150, 50
+                on_release: 
+                    app.root.current = "home"
+                    root.manager.transition.direction = "left"
+            
+        GridLayout:
+            cols:1
+
+            padding: 20
+            spacing: 5
+
+            Image:
+                id: my_image
+                size_hint_y: None
+                height: root.height/2 - 100
+                background_color: (0,0,0,0)
+                source: ""
+
+            TextInput:
+                id : msgBox
+                size_hint: None, None
+                size: root.width/2, root.height/2
+                multiline: True
+                hint_text: "Message To Encode"
+
+          
+            Button:
+                text: "Encode"
+                size_hint: None, None
+                size: 150, 50
+                on_release: encodeWindow.handlePress(msgBox.text)
+
+            
+        
+
+<DecodeWindow>:
+    id: decodeWinow
+    name: "decode"
+
+    GridLayout:
+        cols:2
+
+
+        GridLayout:
+            cols:1
+
+            padding: 50
+            spacing: 5
+
+            Label:
+                text: "Decode Message"
+                size_hint_y : None
+                height: 100
+                font_size: 40
+
+
+            Label:
+                text: "Input File"
+                size_hint_y : None
+                height: 60
+                font_size: 30
+                color: "#00ff00"
+                halign: "left"
+
+            FileChooserIconView:
+                id: filechooser1
+                on_selection: decodeWinow.selected(filechooser1.selection)
+
+            Button:
+                text: "Back"
+                size_hint: None, None
+                size: 150, 50
+                on_release: 
+                    app.root.current = "home"
+                    root.manager.transition.direction = "right"
+            
+        GridLayout:
+            cols:1
+
+            padding: 20
+            spacing: 5
+
+            Image:
+                id: my_image
+                size_hint_y: None
+                height: root.height/2 - 100
+                background_color: (0,0,0,0)
+                source: ""
+
+            TextInput:
+                id : msg
+                size_hint: None, None
+                size: root.width/2, root.height/2
+                multiline: True
+                hint_text: "Decoded Message Will Appear Here"
+
+          
+            Button:
+                text: "Decode"
+                size_hint: None, None
+                size: 150, 50
+                on_release: decodeWinow.decodeFunc(my_image.source)
