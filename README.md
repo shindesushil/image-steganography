@@ -1,4 +1,4 @@
-# image-steganography
+# Image Steganography
 
 ## Important Dependencies
 
